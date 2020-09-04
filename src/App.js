@@ -3,6 +3,7 @@ import './App.css';
 import Button from './Button';
 import Input from "./Input";
 import Title from "./Title";
+import List from "./List";
 
 /**
  * The App Component.
@@ -37,6 +38,12 @@ export default class App extends Component {
      * The dictionary to handle change on the input Component.
      */ 
     this.handleChange = this.handleChange.bind(this);
+
+    this.data = [
+      {id: '1', name: 'producto1'},
+      {id: '2', name: 'producto2'},
+      {id: '3', name: 'producto3'}
+    ];
   }
 
   componentDidMount() {
@@ -111,6 +118,7 @@ export default class App extends Component {
           onClick={this.handleAdd}
           sign={"+"}
         />
+        <List data={this.data} />
       </div>
     );
   }
