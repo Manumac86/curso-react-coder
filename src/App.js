@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Button from './Button';
 import Input from "./Input";
 import Title from "./Title";
 import List from "./List";
+import Product from "./Product";
+
 
 /**
  * The App Component.
@@ -40,9 +44,9 @@ export default class App extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.data = [
-      {id: '1', name: 'producto1'},
-      {id: '2', name: 'producto2'},
-      {id: '3', name: 'producto3'}
+      {id: '1', name: 'Celular'},
+      {id: '2', name: 'Heladera'},
+      {id: '3', name: 'Lavarropas'}
     ];
   }
 
@@ -103,22 +107,37 @@ export default class App extends Component {
     console.log('render()');
     return (
       <div className="App">
-        <Title>
-          <h1>Este es un Título</h1>
-        </Title>
-        <Button
-          onClick={this.handleSubstract}
-          sign={"-"}
-        />
-        <Input
-          count={this.state.count}
-          handleChange={this.handleChange}
-        />
-        <Button
-          onClick={this.handleAdd}
-          sign={"+"}
-        />
-        <List data={this.data} />
+        <BrowserRouter>
+          <Title>
+            <h1>Este es un Título</h1>
+          </Title>
+          <Title>
+            <h4>Este es un SubTítulo</h4>
+          </Title>
+          <Switch>
+            <Route exact path='/'>
+              <Button
+                onClick={this.handleSubstract}
+                sign={"-"}
+              />
+              <Input
+                count={this.state.count}
+                handleChange={this.handleChange}
+              />
+              <Button
+                onClick={this.handleAdd}
+                sign={"+"}
+              />
+              <List data={this.data} />
+            </Route>
+            <Route path='/list'>
+              <List data={this.data} />
+            </Route>
+            <Route path='/product/:id'>
+              <Product data={this.data} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
